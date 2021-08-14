@@ -4,23 +4,26 @@ import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success';
 
-export class UserForm extends Component {
-    state = {
-        step: 1,
-        userLogin: '',
-        userPassword: '',
-        firstName: '',
-        lastName: '',
-        userMI: '',
-        dob: '',
-        ssn: '',
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zip: '',
-        phone: '',
-        email: ''
+class UserForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            step: 1,
+            userLogin: '',
+            userPassword: '',
+            firstName: '',
+            lastName: '',
+            userMI: '',
+            dob: '',
+            ssn: '',
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: '',
+            phone: '',
+            email: ''
+        }
     }
 
     // Go to next step
@@ -45,9 +48,41 @@ export class UserForm extends Component {
     }
 
     render() {
-        const { step } = this.state;
-        const { userLogin, userPassword, firstName, lastName, userMI, dob, ssn, address1, address2, city, state, zip, phone, email } = this.state;
-        const values = { userLogin, userPassword, firstName, lastName, userMI, dob, ssn, address1, address2, city, state, zip, phone, email }
+        const {
+            setAppState
+        } = this.props, { 
+            step, 
+            userLogin, 
+            userPassword, 
+            firstName, 
+            lastName, 
+            userMI, 
+            dob, 
+            ssn, 
+            address1, 
+            address2, 
+            city, 
+            state, 
+            zip, 
+            phone, 
+            email 
+        } = this.state,
+        values = { 
+            userLogin, 
+            userPassword, 
+            firstName, 
+            lastName, 
+            userMI, 
+            dob, 
+            ssn, 
+            address1, 
+            address2, 
+            city, 
+            state, 
+            zip, 
+            phone, 
+            email 
+        };
         
         switch(step) {
             case 1:
@@ -55,6 +90,7 @@ export class UserForm extends Component {
                     <FormUserDetails
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
+                        setAppState={setAppState}
                         values={values}
                     />
                 );
@@ -64,6 +100,7 @@ export class UserForm extends Component {
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         handleChange={this.handleChange}
+                        setAppState={setAppState}
                         values={values}
                     />
                 );
@@ -72,11 +109,13 @@ export class UserForm extends Component {
                     <Confirm
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
+                        setAppState={setAppState}
                         values={values}
                     />
                 );
             case 4:
                 return <Success />;
+            default:
         }
     }
 }

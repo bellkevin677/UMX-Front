@@ -16,13 +16,30 @@ export class FormPersonalDetails extends Component {
     };
 
     render() {
-        const { values, handleChange } = this.props;
+        const { values, handleChange, setAppState } = this.props;
 
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title="Enter Personal Details" />
-                    
+                    <br/>
+                    <RaisedButton
+                        label="Register"
+                        primary={true}
+                        style={styles.button}
+                        onClick={() => {
+                            setAppState({ display: 'register' })
+                        }}
+                    />
+                    <RaisedButton
+                        label="Login"
+                        primary={true}
+                        style={styles.button}
+                        onClick={() => {
+                            setAppState({ display: 'login' })
+                        }}
+                    />
+                    <br/>
                     <TextField
                         hintText="Enter your Date of Birth"
                         floatingLabelText="Date of Birth"

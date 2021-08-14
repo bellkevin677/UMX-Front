@@ -3,20 +3,50 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import events from '../events.js';
 
-export class FormUserDetails extends Component {
+class FormUserDetails extends Component {
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
     };
 
     render() {
-        const { values, handleChange } = this.props;
+        const { values, handleChange, setAppState } = this.props;
 
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title="Enter User Details" />
+                    <br/>
+                    <RaisedButton
+                        label="Server Test"
+                        primary={true}
+                        style={styles.button}
+                        onClick={() => {
+                            events.server()
+                            .then(res => {
+                                console.log(res);
+                            }).catch(err => console.error(err));
+                        }}
+                    />
+                    <RaisedButton
+                        label="Register"
+                        primary={true}
+                        style={styles.button}
+                        onClick={() => {
+                            setAppState({ display: 'register' })
+                        }}
+                    />
+                    <RaisedButton
+                        label="Login"
+                        primary={true}
+                        style={styles.button}
+                        onClick={() => {
+                            setAppState({ display: 'login' })
+                        }}
+                    />
+                    <br/>
                     <TextField
                         hintText="Enter your desired Username"
                         floatingLabelText="Desired Username"
