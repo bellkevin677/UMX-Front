@@ -7,7 +7,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 'register',
+      display: 'login',
       acc: null
     }
     this.setAppState = this.setAppState.bind(this);
